@@ -52,8 +52,6 @@
 * **No dependencies**
 * **No SDK**
 * **Don't track** the user
-* Built with **a11y** in mind
-* **One API** to rule them all
 * **TypeScript** support
 
 ## Documentation 🤗
@@ -84,11 +82,9 @@ Browse [online documentation here](https://github.com/webistomin/vue-socials.js/
 
 * <img src="./assets/icons/facebook.svg" width="16" height="16"/> [Facebook](#sfacebook)
 
-<!---FacebookCount--->
+* <img src="./assets/icons/facebook-messenger.svg" width="16" height="16"/> [Facebook Messenger](#sfacebook-messenger)
 
-* <img src="./assets/icons/facebook-messenger.svg" width="16" height="16"/> [Facebook-Messenger](#sfacebook-messenger)
-
-* <img src="./assets/icons/facebook-workplace.svg" width="16" height="16"/> [Facebook-Workplace](#sfacebook-workplace)
+* <img src="./assets/icons/facebook-workplace.svg" width="16" height="16"/> [Facebook Workplace](#sfacebook-workplace)
 
 * <img src="./assets/icons/flipboard.svg" width="16" height="16"/> [Flipboard](#sflipboard)
 
@@ -96,27 +92,15 @@ Browse [online documentation here](https://github.com/webistomin/vue-socials.js/
 
 * <img src="./assets/icons/github.svg" width="16" height="16"/> [Github](#sgithub)
 
-<!---SGithubCount--->
-
-<!---SGithubGist--->
-
-<!---SGithubGistCount--->
-
-<!---SGithubRepo--->
-
-<!---SGithubRepoCount--->
-
 * <img src="./assets/icons/gmail.svg" width="16" height="16"/> [Gmail](#sgmail)
 
-* <img src="./assets/icons/google-bookmarks.svg" width="16" height="16"/> [Google-Bookmarks](#sgoogle-bookmarks)
+* <img src="./assets/icons/google-bookmarks.svg" width="16" height="16"/> [Google Bookmarks](#sgoogle-bookmarks)
 
 ### H
 
-* <img src="./assets/icons/hacker-news.svg" width="16" height="16"/> [Hacker-News](#shacker-news)
+* <img src="./assets/icons/hacker-news.svg" width="16" height="16"/> [Hacker News](#shackernews)
 
 * <img src="./assets/icons/hatena.svg" width="16" height="16"/> [Hatena](#shatena)
-
-<!---HatenaCount--->
 
 * <img src="./assets/icons/houzz.svg" width="16" height="16"/> [Houzz](#shouzz)
 
@@ -126,13 +110,11 @@ Browse [online documentation here](https://github.com/webistomin/vue-socials.js/
 
 ## K
 
-* <img src="./assets/icons/kakao.svg" width="16" height="16"/> [KakaoStory](#skakaostory)
+* <img src="./assets/icons/kakao.svg" width="16" height="16"/> [Kakao Story](#skakaostory)
 
 ## L
 
 * <img src="./assets/icons/line.svg" width="16" height="16"/> [Line](#sline)
-
-<!---LineCount--->
 
 * <img src="./assets/icons/linkedin.svg" width="16" height="16"/> [Linkedin](#slinkedin)
 
@@ -142,19 +124,15 @@ Browse [online documentation here](https://github.com/webistomin/vue-socials.js/
 
 * <img src="./assets/icons/mailru.svg" width="16" height="16"/> [MailRu](#smailru)
 
-* <img src="./assets/icons/microsoftteams.svg" width="16" height="16"/> [MicrosoftTeams](#smicrosoftteams)
+* <img src="./assets/icons/microsoftteams.svg" width="16" height="16"/> [Microsoft Teams](#smicrosoftteams)
 
 ## O
 
 * <img src="./assets/icons/odnoklassniki.svg" width="16" height="16"/> [Odnoklassniki](#sodnoklassniki)
 
-<!---OdnoklassnikiCount--->
-
 ## P
 
 * <img src="./assets/icons/pinterest.svg" width="16" height="16"/> [Pinterest](#spinterest)
-
-<!---PinterestCount--->
 
 * <img src="./assets/icons/pocket.svg" width="16" height="16"/> [Poket](#spocket)
 
@@ -165,8 +143,6 @@ Browse [online documentation here](https://github.com/webistomin/vue-socials.js/
 ## R
 
 * <img src="./assets/icons/reddit.svg" width="16" height="16"/> [Reddit](#sreddit)
-
-<!---RedditCount--->
 
 * <img src="./assets/icons/renren.svg" width="16" height="16"/> [Renren](#srenren)
 
@@ -186,8 +162,6 @@ Browse [online documentation here](https://github.com/webistomin/vue-socials.js/
 
 * <img src="./assets/icons/tumblr.svg" width="16" height="16"/> [Tumblr](#stumblr)
 
-<!---TumblrCount--->
-
 * <img src="./assets/icons/twitter.svg" width="16" height="16"/> [Twitter](#stwitter)
 
 ## V
@@ -195,8 +169,6 @@ Browse [online documentation here](https://github.com/webistomin/vue-socials.js/
 * <img src="./assets/icons/viber.svg" width="16" height="16"/> [Viber](#sviber)
 
 * <img src="./assets/icons/vkontakte.svg" width="16" height="16"/> [Vkontakte](#svkontakte)
-
-<!---VkontakteCount--->
 
 ## W
 
@@ -298,57 +270,138 @@ Vue.component('SBlogger', SBlogger)
   </tbody>
 </table>
 
----
-<br>
-
 ### SDevto
 
-**Website**
+### SDiaspora
 
-[https://dev.to/](https://dev.to/)
+### SDouban
 
-**Share link documentation**
+### SEmail
 
-[https://dev.to/devteam/announcing-off-platform-share-to-dev-functionality-57j9](https://dev.to/devteam/announcing-off-platform-share-to-dev-functionality-57j9)
+### SEvernote
 
-**Example**
+### SFacebook
 
-[https://dev.to/new?prefill=%0A%20%20%20%20%20%20%20%20---%0A%20%20%20%20%20%20%20%20title%3ATitle%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20tags%3Atag%0A%20%20%20%20%20%20%20%20---%0A%20%20%20%20%20%20%20%20Text%201%0AText%202%0A%7B%25%20wikipedia%20https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FWikipedia%20%25%7D](https://dev.to/new?prefill=%0A%20%20%20%20%20%20%20%20---%0A%20%20%20%20%20%20%20%20title%3ATitle%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20tags%3Atag%0A%20%20%20%20%20%20%20%20---%0A%20%20%20%20%20%20%20%20Text%201%0AText%202%0A%7B%25%20wikipedia%20https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FWikipedia%20%25%7D)
+### SFlipBoard
 
-**Usage**
+### SGithub
 
-```js
-import Vue from 'vue'
-import { SDevto } from 'vue-socials'
+### SGithub
 
-Vue.component('SDevto', SDevto)
-```
+### SGmail
+
+### SGoogleBookmarks
+
+### SHackerNews
+
+### SHatena
+
+### SHouzz
+
+### SInstaPaper
+
+### SKakaoStory
+
+### SLine
+
+### SLinkedIn
+
+### SLiveJournal
+
+### SMailRu
+
+### SMicrosoftTeams
+
+### SOdnoklassniki
+
+### SPinterest
+
+### SPocket
+
+### SQZone
+
+### SReddit
+
+### SRenRen
+
+### SSkype
+
+### SSms
+
+### STelegram
+
+### SThreema
+
+### STrello
+
+### STumblr
+
+### STumblr
+
+### STwitter
+
+### SViber
+
+### SVkontakte
+
+### SWeibo
+
+### SWhatsApp
+
+### SWordPress
+
+### SXing
+
+### SYahoo
+
+### SYammer
+
+---
+<br>
 
 ## Browsers support 🌎
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari-ios/safari-ios_48x48.png" alt="iOS Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>iOS Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/samsung-internet/samsung-internet_48x48.png" alt="Samsung" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Samsung | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Opera | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/yandex/yandex_48x48.png" alt="Yandex" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Yandex |
 | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
 | IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions| last 2 versions
+
 <br>
 
 ## License 📄
 
 ### [MIT](https://github.com/webistomin/vue-socials.js/blob/master/LICENSE)
+
 <br>
 
 ## Support the project ⭐
 
 If you feel awesome and want to support us in a small way, please consider starring and sharing the repo!
+
 <br>
 
 ## Contributing 🎉
 
 Found a bug? Missing a specific feature?
 Your contributions are always welcome! Please have a look at the [contribution guidelines](https://github.com/webistomin/nanogram.js/blob/master/CONTRIBUTING.md) first.
+
 <br>
 
 ## Contributors ❤️
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-<br>
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://webistom.in/en"><img src="https://avatars.githubusercontent.com/u/30475699?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alexey Istomin</b></sub></a><br /><a href="#a11y-webistomin" title="Accessibility">️️️️♿️</a> <a href="https://github.com/webistomin/vue-socials/commits?author=webistomin" title="Tests">⚠️</a> <a href="https://github.com/webistomin/vue-socials/commits?author=webistomin" title="Code">💻</a> <a href="#ideas-webistomin" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/BodrovIgor"><img src="https://avatars.githubusercontent.com/u/79087208?v=4?s=100" width="100px;" alt=""/><br /><sub><b>BodrovIgor</b></sub></a><br /><a href="#content-BodrovIgor" title="Content">🖋</a> <a href="#design-BodrovIgor" title="Design">🎨</a></td>
+  </tr>
+</table>
 
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+<br>
