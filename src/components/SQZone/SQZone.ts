@@ -5,8 +5,10 @@
  * @link https://qzone.qq.com/
  */
 
-import { VNode, defineComponent } from 'vue';
-import BaseSocial from '@/mixins/BaseSocial/BaseSocial';
+import Vue, {
+  CreateElement, VNode, VueConstructor,
+} from 'vue';
+import BaseSocial, { TBaseSocialMixin } from '@/mixins/BaseSocial/BaseSocial';
 import getSerialisedParams from '@/utils/getSerialisedParams';
 
 /**
@@ -18,7 +20,7 @@ export interface ISQZoneShareOptions {
   summary?: string;
 }
 
-export default /* #__PURE__ */ defineComponent({
+export default /* #__PURE__ */ (Vue as VueConstructor<Vue & InstanceType<TBaseSocialMixin<ISQZoneShareOptions>>>).extend({
   name: 'SQZone',
 
   mixins: [BaseSocial<ISQZoneShareOptions>(
@@ -40,7 +42,7 @@ export default /* #__PURE__ */ defineComponent({
     },
   },
 
-  render(): VNode {
-    return this.generateComponent(this.networkURL);
+  render(h: CreateElement): VNode {
+    return this.generateComponent(h, this.networkURL);
   },
 });

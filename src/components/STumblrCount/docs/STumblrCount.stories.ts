@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { Story } from '@storybook/vue';
 import { action } from '@storybook/addon-actions';
 import { TBaseSocialPropsOptions } from '@/mixins/BaseSocial/BaseSocial';
 import STumblrCount, { ISTumblrCountShareOptions } from '../STumblrCount';
@@ -14,26 +14,16 @@ export default {
   },
 };
 
-const Template: Story<TBaseSocialPropsOptions<ISTumblrCountShareOptions>> = (args) => ({
+const Template: Story<TBaseSocialPropsOptions<ISTumblrCountShareOptions>> = (_args, { argTypes }) => ({
+  props: Object.keys(argTypes),
   components: { STumblrCount },
-
-  setup() {
-    const onLoad = action('emit load');
-    const onLoading = action('emit loading');
-    const onError = action('emit error');
-
-    return {
-      args,
-      onLoad,
-      onLoading,
-      onError,
-    };
+  methods: {
+    onLoad: action('emit load'),
   },
-
   template: `
     <s-tumblr-count
       class="base-social"
-      v-bind="args"
+      v-bind="$props"
       @load="onLoad"
     >
     </s-tumblr-count>

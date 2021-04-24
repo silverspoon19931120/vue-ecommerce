@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { Story } from '@storybook/vue';
 import { action } from '@storybook/addon-actions';
 import { TBaseCountPropsOptions } from '@/mixins/BaseCount/BaseCount';
 import SPinterestCount, { ISPinterestCountShareOptions } from '../SPinterestCount';
@@ -14,26 +14,16 @@ export default {
   },
 };
 
-const Template: Story<TBaseCountPropsOptions<ISPinterestCountShareOptions>> = (args) => ({
+const Template: Story<TBaseCountPropsOptions<ISPinterestCountShareOptions>> = (_args, { argTypes }) => ({
+  props: Object.keys(argTypes),
   components: { SPinterestCount },
-
-  setup() {
-    const onLoad = action('emit load');
-    const onLoading = action('emit loading');
-    const onError = action('emit error');
-
-    return {
-      args,
-      onLoad,
-      onLoading,
-      onError,
-    };
+  methods: {
+    onLoad: action('emit load'),
   },
-
   template: `
     <s-pinterest-count
       class="base-social"
-      v-bind="args"
+      v-bind="$props"
       @load="onLoad"
     >
     </s-pinterest-count>

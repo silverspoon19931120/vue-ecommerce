@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 
 /**
  * Import vue components
@@ -8,12 +8,9 @@ import * as components from '@/components';
 /**
  * Install function executed by Vue.use()
  */
-const install: Exclude<Plugin['install'], undefined> = function installVueSocials(app: App) {
+const install: PluginFunction<never> = function installVueSocials(Vue: typeof _Vue) {
   Object.entries(components).forEach((item) => {
-    const componentName = item[0];
-    const component = item[1];
-
-    app.component(componentName, component);
+    Vue.component(item[0], item[1]);
   });
 };
 

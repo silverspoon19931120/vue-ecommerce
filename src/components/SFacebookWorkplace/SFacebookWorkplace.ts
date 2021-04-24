@@ -6,8 +6,10 @@
  * @example https://work.facebook.com/sharer.php?url=https%253A%252F%252Fgithub.com
  */
 
-import { VNode, defineComponent } from 'vue';
-import BaseSocial from '@/mixins/BaseSocial/BaseSocial';
+import Vue, {
+  CreateElement, VNode, VueConstructor,
+} from 'vue';
+import BaseSocial, { TBaseSocialMixin } from '@/mixins/BaseSocial/BaseSocial';
 import getSerialisedParams from '@/utils/getSerialisedParams';
 
 /**
@@ -18,7 +20,7 @@ export interface ISFacebookWorkplaceShareOptions {
   url: string;
 }
 
-export default /* #__PURE__ */ defineComponent({
+export default /* #__PURE__ */ (Vue as VueConstructor<Vue & InstanceType<TBaseSocialMixin<ISFacebookWorkplaceShareOptions>>>).extend({
   name: 'SFacebookWorkplace',
 
   mixins: [BaseSocial<ISFacebookWorkplaceShareOptions>(
@@ -38,7 +40,7 @@ export default /* #__PURE__ */ defineComponent({
     },
   },
 
-  render(): VNode {
-    return this.generateComponent(this.networkURL);
+  render(h: CreateElement): VNode {
+    return this.generateComponent(h, this.networkURL);
   },
 });

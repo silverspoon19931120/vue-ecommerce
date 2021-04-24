@@ -5,9 +5,7 @@
  * @example mailto:google@gmail.com?subject=Subject&body=Hello%0AWorld&cc=google1%40gmail.com&bcc=google2%40gmail.com
  */
 
-import {
-  defineComponent, PropType, VNode, h,
-} from 'vue';
+import Vue, { CreateElement, PropOptions, VNode } from 'vue';
 import getSerialisedParams from '@/utils/getSerialisedParams';
 import getSeparatedList from '@/utils/getSeparatedList';
 
@@ -26,7 +24,7 @@ export interface ISEmailShareOptions {
   bcc?: string[];
 }
 
-export default /* #__PURE__ */defineComponent({
+export default /* #__PURE__ */Vue.extend({
   name: 'SEmail',
 
   props: {
@@ -34,9 +32,9 @@ export default /* #__PURE__ */defineComponent({
      * Share parameters for Email
      */
     shareOptions: {
-      type: Object as PropType<ISEmailShareOptions>,
+      type: Object,
       required: true,
-    },
+    } as PropOptions<ISEmailShareOptions>,
   },
 
   computed: {
@@ -73,15 +71,18 @@ export default /* #__PURE__ */defineComponent({
     },
   },
 
-  render(): VNode {
+  render(h: CreateElement): VNode {
     return h(
       'a',
       {
-        href: this.networkURL,
-        rel: 'noopener noreferrer',
-        'aria-label': this.ariaLabel,
+        attrs: {
+          href: this.networkURL,
+          rel: 'noopener noreferrer',
+          'aria-label': this.ariaLabel,
+        },
+        on: this.$listeners,
       },
-      this.$slots.default?.(),
+      this.$slots.default,
     );
   },
 });

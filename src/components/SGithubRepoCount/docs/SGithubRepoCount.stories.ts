@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { Story } from '@storybook/vue';
 import { action } from '@storybook/addon-actions';
 import { TBaseCountPropsOptions } from '@/mixins/BaseCount/BaseCount';
 import SGithubRepoCount, { ISGithubRepoCountShareOptions } from '../SGithubRepoCount';
@@ -14,29 +14,17 @@ export default {
   },
 };
 
-const Template: Story<TBaseCountPropsOptions<ISGithubRepoCountShareOptions>> = (args) => ({
+const Template: Story<TBaseCountPropsOptions<ISGithubRepoCountShareOptions>> = (_args, { argTypes }) => ({
+  props: Object.keys(argTypes),
   components: { SGithubRepoCount },
-
-  setup() {
-    const onLoad = action('emit load');
-    const onLoading = action('emit loading');
-    const onError = action('emit error');
-
-    return {
-      args,
-      onLoad,
-      onLoading,
-      onError,
-    };
+  methods: {
+    onLoad: action('emit load'),
   },
-
   template: `
     <s-github-repo-count
       class="base-social"
-      v-bind="args"
+      v-bind="$props"
       @load="onLoad"
-      @loading="onLoading"
-      @error="onError"
     >
     </s-github-repo-count>
   `,

@@ -5,8 +5,10 @@
  * @link https://wordpress.org/
  */
 
-import { VNode, defineComponent } from 'vue';
-import BaseSocial from '@/mixins/BaseSocial/BaseSocial';
+import Vue, {
+  CreateElement, VNode, VueConstructor,
+} from 'vue';
+import BaseSocial, { TBaseSocialMixin } from '@/mixins/BaseSocial/BaseSocial';
 import getSerialisedParams from '@/utils/getSerialisedParams';
 
 /**
@@ -21,7 +23,7 @@ export interface ISWordPressShareOptions {
   image?: string;
 }
 
-export default /* #__PURE__ */ defineComponent({
+export default /* #__PURE__ */ (Vue as VueConstructor<Vue & InstanceType<TBaseSocialMixin<ISWordPressShareOptions>>>).extend({
   name: 'SWordPress',
 
   mixins: [BaseSocial<ISWordPressShareOptions>(
@@ -46,7 +48,7 @@ export default /* #__PURE__ */ defineComponent({
     },
   },
 
-  render(): VNode {
-    return this.generateComponent(this.networkURL);
+  render(h: CreateElement): VNode {
+    return this.generateComponent(h, this.networkURL);
   },
 });

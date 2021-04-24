@@ -6,9 +6,12 @@
  * @example https://mail.google.com/mail/u/0/?view=cm&to=google@gmail.com&su=Title&subject=Subject&body=Hello%0AWorld&cc=google1@gmail.com&bcc=google2@gmail.com&fs=1&tf=1
  */
 
-import { VNode, defineComponent } from 'vue';
+import Vue, {
+  CreateElement, VNode,
+  VueConstructor,
+} from 'vue';
 import getSerialisedParams from '@/utils/getSerialisedParams';
-import BaseSocial from '@/mixins/BaseSocial/BaseSocial';
+import BaseSocial, { TBaseSocialMixin } from '@/mixins/BaseSocial/BaseSocial';
 
 /**
  * Share parameters for link
@@ -21,7 +24,7 @@ export interface ISGmailShareOptions {
   bcc?: string;
 }
 
-export default /* #__PURE__ */defineComponent({
+export default /* #__PURE__ */(Vue as VueConstructor<Vue & InstanceType<TBaseSocialMixin<ISGmailShareOptions>>>).extend({
   name: 'SGmail',
 
   mixins: [BaseSocial<ISGmailShareOptions>(
@@ -48,7 +51,7 @@ export default /* #__PURE__ */defineComponent({
     },
   },
 
-  render(): VNode {
-    return this.generateComponent(this.networkURL);
+  render(h: CreateElement): VNode {
+    return this.generateComponent(h, this.networkURL);
   },
 });

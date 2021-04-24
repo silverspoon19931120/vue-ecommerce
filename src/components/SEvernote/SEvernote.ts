@@ -6,8 +6,10 @@
  * @example https://www.evernote.com/clip.action?url=https%3A%2F%2Fgithub.com%2F&title=Title
  */
 
-import { VNode, defineComponent } from 'vue';
-import BaseSocial from '@/mixins/BaseSocial/BaseSocial';
+import Vue, {
+  CreateElement, VNode, VueConstructor,
+} from 'vue';
+import BaseSocial, { TBaseSocialMixin } from '@/mixins/BaseSocial/BaseSocial';
 import getSerialisedParams from '@/utils/getSerialisedParams';
 
 /**
@@ -18,7 +20,7 @@ export interface ISEvernoteShareOptions {
   title?: string;
 }
 
-export default /* #__PURE__ */ defineComponent({
+export default /* #__PURE__ */ (Vue as VueConstructor<Vue & InstanceType<TBaseSocialMixin<ISEvernoteShareOptions>>>).extend({
   name: 'SEvernote',
 
   mixins: [BaseSocial<ISEvernoteShareOptions>(
@@ -43,7 +45,7 @@ export default /* #__PURE__ */ defineComponent({
     },
   },
 
-  render(): VNode {
-    return this.generateComponent(this.networkURL);
+  render(h: CreateElement): VNode {
+    return this.generateComponent(h, this.networkURL);
   },
 });

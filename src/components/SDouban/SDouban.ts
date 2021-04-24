@@ -6,8 +6,10 @@
  * @example https://accounts.douban.com/passport/login?redir=https%3A//www.douban.com/share/service%3Fname%3D%26href%3D%26image%3D%26updated%3D%26bm%3D%26name%3DTitle%26text%3DText%26comment%3Dhttps%253A%252F%252Fgithub.com%252F%26href%3Dhttps%253A%252F%252Fgithub.com%252F
  */
 
-import { VNode, defineComponent } from 'vue';
-import BaseSocial from '@/mixins/BaseSocial/BaseSocial';
+import Vue, {
+  CreateElement, VNode, VueConstructor,
+} from 'vue';
+import BaseSocial, { TBaseSocialMixin } from '@/mixins/BaseSocial/BaseSocial';
 import getSerialisedParams from '@/utils/getSerialisedParams';
 
 /**
@@ -19,7 +21,7 @@ export interface ISDoubanShareOptions {
   url?: string;
 }
 
-export default /* #__PURE__ */ defineComponent({
+export default /* #__PURE__ */ (Vue as VueConstructor<Vue & InstanceType<TBaseSocialMixin<ISDoubanShareOptions>>>).extend({
   name: 'SDouban',
 
   mixins: [BaseSocial<ISDoubanShareOptions>(
@@ -44,7 +46,7 @@ export default /* #__PURE__ */ defineComponent({
     },
   },
 
-  render(): VNode {
-    return this.generateComponent(this.networkURL);
+  render(h: CreateElement): VNode {
+    return this.generateComponent(h, this.networkURL);
   },
 });

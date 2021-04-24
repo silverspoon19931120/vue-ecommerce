@@ -6,10 +6,12 @@
  * @example https://vk.com/share.php?act=count&index=1&url=http
  */
 
-import { defineComponent } from 'vue';
+import Vue, {
+  VueConstructor,
+} from 'vue';
 import JSONP from '@/utils/jsonp';
 import getSerialisedParams from '@/utils/getSerialisedParams';
-import BaseCount from '@/mixins/BaseCount/BaseCount';
+import BaseCount, { TBaseCountMixin } from '@/mixins/BaseCount/BaseCount';
 
 declare global {
   interface Window {
@@ -35,7 +37,7 @@ export interface ISVkontakteResult {
   count: number;
 }
 
-export default /* #__PURE__ */ defineComponent({
+export default /* #__PURE__ */ (Vue as VueConstructor<Vue & InstanceType<TBaseCountMixin<ISVkontakteCountShareOptions, ISVkontakteResult>>>).extend({
   mixins: [BaseCount<ISVkontakteCountShareOptions, ISVkontakteResult>(
     'Vkontakte',
   )],

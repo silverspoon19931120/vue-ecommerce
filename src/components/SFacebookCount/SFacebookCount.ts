@@ -6,11 +6,11 @@
  * @example https://graph.facebook.com/?url=https://github.com/
  */
 
-import { defineComponent } from 'vue';
+import Vue, { VueConstructor } from 'vue';
 import JSONP from '@/utils/jsonp';
 import getSerialisedParams from '@/utils/getSerialisedParams';
 import getSeparatedList from '@/utils/getSeparatedList';
-import BaseCount from '@/mixins/BaseCount/BaseCount';
+import BaseCount, { TBaseCountMixin } from '@/mixins/BaseCount/BaseCount';
 
 export interface ISFacebookCountSuccessResponse {
   engagement?: {
@@ -51,7 +51,7 @@ export interface ISFacebookCountShareOptions {
   scopes?: string[];
 }
 
-export default /* #__PURE__ */ defineComponent({
+export default /* #__PURE__ */ (Vue as VueConstructor<Vue & InstanceType<TBaseCountMixin<ISFacebookCountShareOptions, TSFacebookCountResult>>>).extend({
   mixins: [BaseCount<ISFacebookCountShareOptions, TSFacebookCountResult>(
     'Facebook',
   )],

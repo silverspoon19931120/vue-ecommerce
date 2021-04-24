@@ -6,8 +6,10 @@
  * @example https://github.com/webistomin/
  */
 
-import { VNode, defineComponent } from 'vue';
-import BaseSocial from '@/mixins/BaseSocial/BaseSocial';
+import Vue, {
+  CreateElement, VNode, VueConstructor,
+} from 'vue';
+import BaseSocial, { TBaseSocialMixin } from '@/mixins/BaseSocial/BaseSocial';
 
 const GITHUB_LINK_TYPES = {
   sponsor: 'sponsor',
@@ -25,7 +27,7 @@ export interface ISGithubShareOptions {
   type: TSGithubLinkType;
 }
 
-export default /* #__PURE__ */ defineComponent({
+export default /* #__PURE__ */ (Vue as VueConstructor<Vue & InstanceType<TBaseSocialMixin<ISGithubShareOptions>>>).extend({
   name: 'SGithub',
 
   mixins: [BaseSocial<ISGithubShareOptions>(
@@ -56,7 +58,7 @@ export default /* #__PURE__ */ defineComponent({
       }
     },
 
-    ariaLabel(): string {
+    ariaLabel() {
       const { shareOptions } = this;
       const {
         username, type,
@@ -74,7 +76,7 @@ export default /* #__PURE__ */ defineComponent({
     },
   },
 
-  render(): VNode {
-    return this.generateComponent(this.networkURL);
+  render(h: CreateElement): VNode {
+    return this.generateComponent(h, this.networkURL);
   },
 });

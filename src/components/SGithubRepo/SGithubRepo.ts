@@ -5,8 +5,10 @@
  * @link https://github.com/
  */
 
-import { VNode, defineComponent } from 'vue';
-import BaseSocial from '@/mixins/BaseSocial/BaseSocial';
+import Vue, {
+  CreateElement, VNode, VueConstructor,
+} from 'vue';
+import BaseSocial, { TBaseSocialMixin } from '@/mixins/BaseSocial/BaseSocial';
 
 const GITHUB_LINK_TYPES = {
   repo: 'repo',
@@ -30,7 +32,7 @@ export interface ISGithubRepoShareOptions {
   type: TSGithubLinkType;
 }
 
-export default /* #__PURE__ */ defineComponent({
+export default /* #__PURE__ */ (Vue as VueConstructor<Vue & InstanceType<TBaseSocialMixin<ISGithubRepoShareOptions>>>).extend({
   name: 'SGithubRepo',
 
   mixins: [BaseSocial<ISGithubRepoShareOptions>(
@@ -94,7 +96,7 @@ export default /* #__PURE__ */ defineComponent({
     },
   },
 
-  render(): VNode {
-    return this.generateComponent(this.networkURL);
+  render(h: CreateElement): VNode {
+    return this.generateComponent(h, this.networkURL);
   },
 });

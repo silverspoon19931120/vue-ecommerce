@@ -6,13 +6,8 @@
  * and has props for window features. Also has a method for component render.
  */
 
-import {
-  defineComponent,
-  VNode,
-  PropType,
-  h,
-  DefineComponent,
-} from 'vue';
+import { ExtendedVue } from 'vue/types/vue';
+import Vue, { CreateElement, PropOptions, VNode } from 'vue';
 import { IWindowFeatures } from '@/types/common/windowFeatures';
 import getFormattedWindowFeatures from '@/utils/getFormattedWindowFeatures';
 import getPopupClientRect from '@/utils/getPopupClientRect';
@@ -29,7 +24,14 @@ export type TBaseSocialPropsOptions<T> = {
   useNativeBehavior: boolean;
 };
 
-export type TBaseSocialMixin<T> = DefineComponent<TBaseSocialPropsOptions<T>>;
+export type TBaseSocialMixin<T> = ExtendedVue<Vue,
+IBaseSocialDataOptions,
+{
+  generateComponent(h: CreateElement, url: string): VNode;
+  openShareDialog(url: string): void
+},
+unknown,
+TBaseSocialPropsOptions<T>>;
 
 export const DEFAULT_WINDOW_FEATURES = {
   width: 600,
@@ -42,7 +44,6 @@ export const DEFAULT_WINDOW_FEATURES = {
  * it causes problems with tree-shaking. I don't know why.
  * A little bit inconvenient, but overall OK :)
  */
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function BaseSocials<T>(
   name: string,
   customWindowFeatures?: IWindowFeatures,
@@ -50,31 +51,31 @@ export default function BaseSocials<T>(
   customAriaLabel?: string,
   isShareOptionsRequired?: boolean,
   isWindowFeaturesRequired?: boolean,
-) {
-  return /* #__PURE__ */defineComponent({
+): TBaseSocialMixin<T> {
+  return /* #__PURE__ */Vue.extend({
     props: {
       /**
        * Requested features of the new window
        * @link https://developer.mozilla.org/en-US/docs/Web/API/Window/open#Window_features
        */
       windowFeatures: {
-        type: Object as PropType<IWindowFeatures>,
+        type: Object,
         default: () => customWindowFeatures || DEFAULT_WINDOW_FEATURES,
         required: isWindowFeaturesRequired,
-      },
+      } as PropOptions<IWindowFeatures>,
       /**
        * Share parameters for social network
        */
       shareOptions: {
-        type: Object as PropType<T>,
+        type: Object,
         default: () => customShareOptions || {} as T,
         required: isShareOptionsRequired || true,
-      },
+      } as PropOptions<T>,
       /**
        * Use native link behavior instead of window.open()
        */
       useNativeBehavior: {
-        type: Boolean as PropType<boolean>,
+        type: Boolean,
         default: false,
       },
     },
@@ -86,12 +87,10 @@ export default function BaseSocials<T>(
       };
     },
 
-    emits: ['click', 'popup-block', 'popup-open', 'popup-close', 'popup-focus'],
-
     /**
      * Make sure interval has been cleared
      */
-    beforeUnmount() {
+    beforeDestroy() {
       window.clearInterval(this.shareDialogCloseIntervalId);
     },
 
@@ -99,7 +98,7 @@ export default function BaseSocials<T>(
       /**
        * Merge default and user window features
        */
-      mergedWindowFeatures(): IWindowFeatures {
+      mergedWindowFeatures() {
         const { windowFeatures } = this;
         /**
          * We use `Object.assign` instead of the spread operator
@@ -111,7 +110,7 @@ export default function BaseSocials<T>(
        * Calculate the aria-label for a link.
        * It replaces @s in a string with a social network name.
        */
-      ariaLabel(): string {
+      ariaLabel() {
         const { $attrs } = this;
         const { target } = $attrs;
         let label = customAriaLabel || 'Share this with @s.';
@@ -131,7 +130,7 @@ export default function BaseSocials<T>(
        */
       openShareDialog(url: string): void {
         const { mergedWindowFeatures } = this;
-        const { width = DEFAULT_WINDOW_FEATURES.width, height = DEFAULT_WINDOW_FEATURES.height } = mergedWindowFeatures;
+        const { width, height } = mergedWindowFeatures;
 
         const shareDialogClientRect = getPopupClientRect(width, height);
         const formattedFeatures = getFormattedWindowFeatures(Object.assign({}, mergedWindowFeatures, shareDialogClientRect));
@@ -189,24 +188,28 @@ export default function BaseSocials<T>(
       /**
        * Create new share component
        */
-      generateComponent(url: string): VNode {
+      generateComponent(h: CreateElement, url: string): VNode {
         return h(
           'a',
           {
-            href: url,
-            target: '_blank',
-            rel: 'nofollow noopener noreferrer',
-            'aria-label': this.ariaLabel,
-            onClick: (event: Event) => {
-              if (!this.useNativeBehavior) {
-                event.preventDefault();
-                this.openShareDialog(url);
-              }
-
-              this.$emit('click');
+            attrs: {
+              href: url,
+              target: '_blank',
+              rel: 'nofollow noopener noreferrer',
+              'aria-label': this.ariaLabel,
             },
+            on: Object.assign({}, this.$listeners, {
+              click: (event: Event) => {
+                if (!this.useNativeBehavior) {
+                  event.preventDefault();
+                  this.openShareDialog(url);
+                }
+
+                this.$emit('click');
+              },
+            }),
           },
-          this.$slots.default?.(),
+          this.$slots.default,
         );
       },
     },

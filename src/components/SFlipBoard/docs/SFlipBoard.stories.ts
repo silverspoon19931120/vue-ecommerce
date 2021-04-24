@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { Story } from '@storybook/vue';
 import { action } from '@storybook/addon-actions';
 import { TBaseSocialPropsOptions } from '@/mixins/BaseSocial/BaseSocial';
 import SFlipBoard, { ISFlipBoardShareOptions } from '../SFlipBoard';
@@ -14,28 +14,19 @@ export default {
   },
 };
 
-const Template: Story<TBaseSocialPropsOptions<ISFlipBoardShareOptions>> = (args) => ({
+const Template: Story<TBaseSocialPropsOptions<ISFlipBoardShareOptions>> = (_args, { argTypes }) => ({
+  props: Object.keys(argTypes),
   components: { SFlipBoard },
-
-  setup() {
-    const onClose = action('emit close');
-    const onOpen = action('emit open');
-    const onBlock = action('emit block');
-    const onFocus = action('emit focus');
-
-    return {
-      args,
-      onClose,
-      onOpen,
-      onBlock,
-      onFocus,
-    };
+  methods: {
+    onClose: action('emit close'),
+    onOpen: action('emit open'),
+    onBlock: action('emit block'),
+    onFocus: action('emit focus'),
   },
-
   template: `
     <s-flip-board
       class="base-social"
-      v-bind="args"
+      v-bind="$props"
       @popup-close="onClose"
       @popup-open="onOpen"
       @popup-block="onBlock"

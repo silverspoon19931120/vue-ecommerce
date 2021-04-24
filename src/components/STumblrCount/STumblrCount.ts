@@ -5,9 +5,9 @@
  * @link https://tumblr.com/
  */
 
-import { defineComponent } from 'vue';
+import Vue, { VueConstructor } from 'vue';
 import getSerialisedParams from '@/utils/getSerialisedParams';
-import BaseCount from '@/mixins/BaseCount/BaseCount';
+import BaseCount, { TBaseCountMixin } from '@/mixins/BaseCount/BaseCount';
 import JSONP from '@/utils/jsonp';
 
 /**
@@ -29,7 +29,7 @@ export interface ISTumblrResult {
   }
 }
 
-export default /* #__PURE__ */ defineComponent({
+export default /* #__PURE__ */ (Vue as VueConstructor<Vue & InstanceType<TBaseCountMixin<ISTumblrCountShareOptions, ISTumblrResult>>>).extend({
   name: 'STumblrCount',
 
   mixins: [BaseCount<ISTumblrCountShareOptions, ISTumblrResult>(

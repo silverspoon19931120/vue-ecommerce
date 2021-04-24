@@ -6,8 +6,10 @@
  * @example https://www.blogger.com/blog-this.g?u=https%3A%2F%2Fgithub.com%2F&t=Text&n=Title/
  */
 
-import { defineComponent, VNode } from 'vue';
-import BaseSocial from '@/mixins/BaseSocial/BaseSocial';
+import Vue, {
+  CreateElement, VNode, VueConstructor,
+} from 'vue';
+import BaseSocial, { TBaseSocialMixin } from '@/mixins/BaseSocial/BaseSocial';
 import getSerialisedParams from '@/utils/getSerialisedParams';
 
 /**
@@ -23,7 +25,7 @@ export interface ISBloggerShareOptions {
   text?: string;
 }
 
-export default /* #__PURE__ */ defineComponent({
+export default /* #__PURE__ */ (Vue as VueConstructor<Vue & InstanceType<TBaseSocialMixin<ISBloggerShareOptions>>>).extend({
   name: 'SBlogger',
 
   mixins: [BaseSocial<ISBloggerShareOptions>(
@@ -50,7 +52,7 @@ export default /* #__PURE__ */ defineComponent({
     },
   },
 
-  render(): VNode {
-    return this.generateComponent(this.networkURL);
+  render(h: CreateElement): VNode {
+    return this.generateComponent(h, this.networkURL);
   },
 });
